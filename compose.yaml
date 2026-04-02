@@ -1,0 +1,57 @@
+services:
+  spark-master:
+    image: apache/spark:3.5.8-scala2.12-java17-python3-ubuntu
+    command:
+      [
+        "/opt/spark/bin/spark-class",
+        "org.apache.spark.deploy.master.Master",
+        "--host",
+        "spark-master",
+        "--port",
+        "7077",
+        "--webui-port",
+        "8080"
+      ]
+    ports:
+      - "${SPARK_MASTER_UI_PORT:-8080}:8080"
+      - "${SPARK_MASTER_PORT:-7077}:7077"
+
+  spark-worker:
+    image: apache/spark:3.5.8-scala2.12-java17-python3-ubuntu
+    depends_on:
+      - spark-master
+    command:
+      [
+        "/opt/spark/bin/spark-class",
+        "org.apache.spark.deploy.worker.Worker",
+        "spark://spark-master:7077",
+        "--webui-port",
+        "8081",
+        "--cores",
+        "${SPARK_WORKER_CORES:-2}",
+        "--memory",
+        "${SPARK_WORKER_MEMORY:-2G}"
+      ]
+    ports:
+      - "${SPARK_WORKER_UI_PORT:-8081}:8081"
+    volumes:
+      - ./app/data:/shared-data
+
+  app:
+    build:
+      context: ./app
+      dockerfile: docker/Dockerfile
+    depends_on:
+      - spark-master
+      - spark-worker
+    working_dir: /workspace/app
+    tty: true
+    stdin_open: true
+    command: sleep infinity
+    environment:
+      SPARK_MASTER_URL: spark://spark-master:7077
+      PYTHONUNBUFFERED: "1"
+      UV_LINK_MODE: copy
+    volumes:
+      - ./app:/workspace/app
+      - ./app/data:/shared-data

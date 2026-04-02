@@ -1,0 +1,22 @@
+{
+  "name": "pyspark-lab-app",
+  "dockerComposeFile": ["../../compose.yaml"],
+  "service": "app",
+  "workspaceFolder": "/workspace/app",
+  "shutdownAction": "stopCompose",
+  "remoteUser": "root",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "charliermarsh.ruff"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "jupyter.notebookFileRoot": "/workspace/app",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
