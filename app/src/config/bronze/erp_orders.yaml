@@ -1,0 +1,9 @@
+reader:
+  path: /workspace/app/data/input/erp_orders.csv
+  format: csv
+  header: true
+  sep: ','
+writer:
+  path: /workspace/app/data/output/bronze/erp_orders
+  format: parquet
+  mode: overwrite

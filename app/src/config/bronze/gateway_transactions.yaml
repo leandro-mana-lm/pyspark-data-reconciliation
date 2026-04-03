@@ -1,0 +1,9 @@
+reader:
+  path: /workspace/app/data/input/gateway_transactions.csv
+  format: csv
+  header: true
+  sep: ','
+writer:
+  path: /workspace/app/data/output/bronze/gateway_transactions
+  format: parquet
+  mode: overwrite

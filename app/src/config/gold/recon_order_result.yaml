@@ -1,0 +1,11 @@
+reader:
+  erp_orders:
+    path: /workspace/app/data/output/silver/erp_orders
+    format: parquet
+  gateway_transactions:
+    path: /workspace/app/data/output/silver/gateway_transactions
+    format: parquet
+writer:
+  path: /workspace/app/data/output/gold/recon_order_result
+  format: parquet
+  mode: overwrite

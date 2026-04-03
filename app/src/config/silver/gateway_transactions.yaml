@@ -1,0 +1,7 @@
+reader:
+  path: /workspace/app/data/output/bronze/gateway_transactions
+  format: parquet
+writer:
+  path: /workspace/app/data/output/silver/gateway_transactions
+  format: parquet
+  mode: overwrite

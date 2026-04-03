@@ -1,0 +1,7 @@
+reader:
+  path: /workspace/app/data/output/gold/recon_order_result
+  format: parquet
+writer:
+  path: /workspace/app/data/output/gold/agg_reconciliation_summary
+  format: parquet
+  mode: overwrite

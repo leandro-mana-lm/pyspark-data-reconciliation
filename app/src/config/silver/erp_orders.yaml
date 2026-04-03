@@ -1,0 +1,7 @@
+reader:
+  path: /workspace/app/data/output/bronze/erp_orders
+  format: parquet
+writer:
+  path: /workspace/app/data/output/silver/erp_orders
+  format: parquet
+  mode: overwrite
